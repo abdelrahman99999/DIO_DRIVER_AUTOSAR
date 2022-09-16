@@ -200,6 +200,10 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId);
 void Dio_GetVersionInfo(Std_VersionInfoType *versioninfo);
 #endif
 
+Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr );
+
+void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,Dio_PortLevelType Level );
+
 
 /*******************************************************************************
  *                       External Variables                                    *

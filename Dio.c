@@ -417,8 +417,8 @@ Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId){
 				   Level - Value to be written
 * Parameters (inout): None
 * Parameters (out): None
-* Return value: Dio_PortLevelType
-* Description: Function to return the level of all channels of that port.
+* Return value: None
+* Description: Function  to set a value of the port.
 ************************************************************************************/
 void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level){
 	volatile uint32 * Port_Ptr = NULL_PTR;
@@ -478,4 +478,142 @@ void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level){
 	}
 
 	*Port_Ptr=Level;
+}
+
+/************************************************************************************
+* Service Name: Dio_ReadChannelGroup
+* Service ID[hex]: 0x04
+* Sync/Async: Synchronous
+* Reentrancy: Reentrant
+* Parameters (in): ChannelGroupIdPtr - Pointer to ChannelGroup.
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: Dio_PortLevelType
+* Description: Function to  read a subset of the adjoining bits of a port.
+************************************************************************************/
+Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr ){
+	volatile uint32 * Port_Ptr = NULL_PTR;
+	boolean error = FALSE;
+
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+		/* Check if the Driver is initialized before using this function */
+		if (DIO_NOT_INITIALIZED == Dio_Status)
+		{
+			Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+					DIO_READ_CHANNEL_GROUP_SID, DIO_E_UNINIT);
+			error = TRUE;
+		}
+		else
+		{
+			/* No Action Required */
+		}
+		/* Check if the used channel is within the valid range */
+		if (NULL_PTR==ChannelGroupIdPtr)
+		{
+
+			Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+					DIO_READ_CHANNEL_GROUP_SID, DIO_E_PARAM_POINTER);
+			error = TRUE;
+		}
+		else
+		{
+			/* No Action Required */
+		}
+#endif
+	Dio_PortLevelType state ;
+	/* In-case there are no errors */
+	if (FALSE == error) {
+
+		switch (ChannelGroupIdPtr->PortIndex) {
+			case 0:    Port_Ptr = &GPIO_PORTA_DATA_REG;
+			break;
+			case 1:    Port_Ptr = &GPIO_PORTB_DATA_REG;
+			break;
+			case 2:    Port_Ptr = &GPIO_PORTC_DATA_REG;
+			break;
+			case 3:    Port_Ptr = &GPIO_PORTD_DATA_REG;
+			break;
+			case 4:    Port_Ptr = &GPIO_PORTE_DATA_REG;
+			break;
+			case 5:    Port_Ptr = &GPIO_PORTF_DATA_REG;
+			break;
+		}
+
+		state = ((*Port_Ptr)&(ChannelGroupIdPtr->mask))>>ChannelGroupIdPtr->offset;
+	}
+	else
+	{
+		/* No Action Required */
+
+	}
+	return state;
+}
+
+/************************************************************************************
+* Service Name: Dio_WriteChannelGroup
+* Service ID[hex]: 0x05
+* Sync/Async: Synchronous
+* Reentrancy: Reentrant
+* Parameters (in): ChannelGroupIdPtr - Pointer to ChannelGroup.
+* 					Level -Value to be written
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: Dio_PortLevelType
+* Description: Function to set a subset of the adjoining bits of a port to a specified level.
+************************************************************************************/
+void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,Dio_PortLevelType Level ){
+	volatile uint32 * Port_Ptr = NULL_PTR;
+	boolean error = FALSE;
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+		/* Check if the Driver is initialized before using this function */
+		if (DIO_NOT_INITIALIZED == Dio_Status)
+		{
+			Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+					DIO_WRITE_CHANNEL_GROUP_SID, DIO_E_UNINIT);
+			error = TRUE;
+		}
+		else
+		{
+			/* No Action Required */
+		}
+		/* Check if the used channel is within the valid range */
+		if (NULL_PTR==ChannelGroupIdPtr)
+		{
+
+			Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+					DIO_WRITE_CHANNEL_GROUP_SID, DIO_E_PARAM_POINTER);
+			error = TRUE;
+		}
+		else
+		{
+			/* No Action Required */
+		}
+#endif
+
+		/* In-case there are no errors */
+	if (FALSE == error) {
+		switch (ChannelGroupIdPtr->PortIndex) {
+			case 0:    Port_Ptr = &GPIO_PORTA_DATA_REG;
+			break;
+			case 1:    Port_Ptr = &GPIO_PORTB_DATA_REG;
+			break;
+			case 2:    Port_Ptr = &GPIO_PORTC_DATA_REG;
+			break;
+			case 3:    Port_Ptr = &GPIO_PORTD_DATA_REG;
+			break;
+			case 4:    Port_Ptr = &GPIO_PORTE_DATA_REG;
+			break;
+			case 5:    Port_Ptr = &GPIO_PORTF_DATA_REG;
+			break;
+		}
+
+		*Port_Ptr = ((*Port_Ptr)&(~(ChannelGroupIdPtr->mask))) | (Level<<ChannelGroupIdPtr->offset);
+
+	}
+	else
+	{
+		/* No Action Required */
+
+	}
+
 }
