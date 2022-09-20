@@ -14,19 +14,19 @@
 
 #if (DIO_DEV_ERROR_DETECT == STD_ON)
 
-#include "Det.h"
-/* AUTOSAR Version checking between Det and Dio Modules */
-#if ((DET_AR_MAJOR_VERSION != DIO_AR_RELEASE_MAJOR_VERSION)\
- || (DET_AR_MINOR_VERSION != DIO_AR_RELEASE_MINOR_VERSION)\
- || (DET_AR_PATCH_VERSION != DIO_AR_RELEASE_PATCH_VERSION))
-  #error "The AR version of Det.h does not match the expected version"
-#endif
+	#include "Det.h"
+	/* AUTOSAR Version checking between Det and Dio Modules */
+	#if ((DET_AR_MAJOR_VERSION != DIO_AR_RELEASE_MAJOR_VERSION)\
+	|| (DET_AR_MINOR_VERSION != DIO_AR_RELEASE_MINOR_VERSION)\
+	|| (DET_AR_PATCH_VERSION != DIO_AR_RELEASE_PATCH_VERSION))
+	#error "The AR version of Det.h does not match the expected version"
+	#endif
 
 #endif
 
 STATIC const Dio_ConfigChannel * Dio_PortChannels = NULL_PTR;
-STATIC Dio_PortType *Dio_Ports = NULL_PTR;
-STATIC Dio_ChannelGroupType *Dio_ChannelGroups  = NULL_PTR;
+STATIC const Dio_PortType * Dio_Ports = NULL_PTR;
+//STATIC const Dio_ChannelGroupType * Dio_ChannelGroups  = NULL_PTR;
 STATIC uint8 Dio_Status = DIO_NOT_INITIALIZED;
 
 /************************************************************************************
@@ -58,8 +58,10 @@ void Dio_Init(const Dio_ConfigType * ConfigPtr)
 		 */
 		Dio_Status       = DIO_INITIALIZED;
 		Dio_PortChannels = ConfigPtr->Channels; /* address of the first Channels structure --> Channels[0] */
-		Dio_Ports=ConfigPtr->Ports;				/* address of the first Port structure --> ports[0] */
-		Dio_ChannelGroups=ConfigPtr->Groups;	/* address of the first Group structure --> Groups[0] */
+		#if(DIO_CONFIGURED_PORTS > 0U)
+			Dio_Ports=ConfigPtr->Ports;				/* address of the first Port structure --> ports[0] */
+		#endif
+		
 	}
 }
 
@@ -513,7 +515,7 @@ Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupI
 		{
 
 			Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
-					DIO_READ_CHANNEL_GROUP_SID, DIO_E_PARAM_POINTER);
+					DIO_READ_CHANNEL_GROUP_SID, DIO_E_PARAM_INVALID_GROUP);
 			error = TRUE;
 		}
 		else
@@ -582,7 +584,7 @@ void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,Dio_Por
 		{
 
 			Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
-					DIO_WRITE_CHANNEL_GROUP_SID, DIO_E_PARAM_POINTER);
+					DIO_WRITE_CHANNEL_GROUP_SID, DIO_E_PARAM_INVALID_GROUP);
 			error = TRUE;
 		}
 		else

@@ -12,8 +12,7 @@
 #ifndef DIO_H
 #define DIO_H
 
-/* Id for the company in the AUTOSAR
- * for example Mohamed Tarek's ID = 1000 :) */
+/* Id for the company in the AUTOSAR */
 #define DIO_VENDOR_ID    (1000U)
 
 /* Dio Module Id */
@@ -165,10 +164,14 @@ typedef struct
 
 /* Data Structure required for initializing the Dio Driver */
 typedef struct Dio_ConfigType
-{
-	Dio_ConfigChannel Channels[DIO_CONFIGURED_CHANNLES];
-  Dio_PortType Ports[DIO_CONFIGURED_PORTS];
-	Dio_ChannelGroupType Groups [DIO_CONFIGURED_GROUPS];
+{       
+        Dio_ConfigChannel Channels[DIO_CONFIGURED_CHANNLES];
+        #if(DIO_CONFIGURED_PORTS > 0U)
+          Dio_PortType Ports[DIO_CONFIGURED_PORTS];
+        #endif
+        #if(DIO_CONFIGURED_GROUPS > 0U)
+        Dio_ChannelGroupType Groups [DIO_CONFIGURED_GROUPS];
+        #endif
   
 } Dio_ConfigType;
 
