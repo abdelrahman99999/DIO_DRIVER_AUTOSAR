@@ -6,6 +6,7 @@
  *
  * Description: Header file for TM4C123GH6PM Microcontroller - Dio Driver
  *
+ * Author: Abdelrahman Elsayed
  ******************************************************************************/
 
 #ifndef DIO_H
@@ -200,8 +201,10 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId);
 void Dio_GetVersionInfo(Std_VersionInfoType *versioninfo);
 #endif
 
+/* Function for DIO read ChannelGroup API */
 Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr );
 
+/* Function for DIO write ChannelGroup API */
 void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,Dio_PortLevelType Level );
 
 
