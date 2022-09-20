@@ -6,6 +6,7 @@
  *
  * Description: General type definitions
  *
+ * Author: Abdelrahman Elsayed
  *
  *******************************************************************************/
 
