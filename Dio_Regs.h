@@ -6,6 +6,7 @@
  *
  * Description: Header file for TM4C123GH6PM Microcontroller - Dio Driver Registers
  *
+ * Author: Abdelrahman Elsayed
  ******************************************************************************/
 
 #ifndef DIO_REGS_H
