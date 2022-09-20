@@ -7,6 +7,7 @@
  * Description:  Det stores the development errors reported by other modules.
  *               This header file is a STUB for the Det Module
  *
+ * Author: Abdelrahman Elsayed
  ******************************************************************************/
 
 #ifndef DET_H
