@@ -6,6 +6,7 @@
  *
  * Description: Platform types for ARM Cortex-M4F
  *
+ * Author: Abdelrahman Elsayed
  *
  *******************************************************************************/
 
