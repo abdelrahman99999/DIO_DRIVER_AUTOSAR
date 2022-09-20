@@ -6,7 +6,7 @@
  *
  * Description: Commonly used Macros
  *
- *
+ * Author: Abdelrahman Elsayed
  *******************************************************************************/
 
 #ifndef COMMON_MACROS
