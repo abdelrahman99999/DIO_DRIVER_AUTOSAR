@@ -7,7 +7,7 @@
  * Description:  This file contains the definitions and macros specified by
  *               AUTOSAR for the abstraction of compiler specific keywords.
  *
- *
+ * Author: Abdelrahman Elsayed
  *******************************************************************************/
 
 #ifndef COMPILER_H
