@@ -271,6 +271,7 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
 {
 	volatile uint32 * Port_Ptr = NULL_PTR;
 	boolean error = FALSE;
+	Dio_LevelType state;
 
 #if (DIO_DEV_ERROR_DETECT == STD_ON)
 	/* Check if the Driver is initialized before using this function */
@@ -297,7 +298,7 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
 		/* No Action Required */
 	}
 #endif
-	Dio_LevelType state;
+	
 	/* In-case there are no errors */
 	if(FALSE == error)
 	{
@@ -497,7 +498,7 @@ void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level){
 Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr ){
 	volatile uint32 * Port_Ptr = NULL_PTR;
 	boolean error = FALSE;
-
+	Dio_PortLevelType state ;
 #if (DIO_DEV_ERROR_DETECT == STD_ON)
 		/* Check if the Driver is initialized before using this function */
 		if (DIO_NOT_INITIALIZED == Dio_Status)
@@ -523,7 +524,7 @@ Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupI
 			/* No Action Required */
 		}
 #endif
-	Dio_PortLevelType state ;
+	
 	/* In-case there are no errors */
 	if (FALSE == error) {
 

@@ -6,7 +6,7 @@
  *
  * Description: Post Build Configuration Source file for TM4C123GH6PM Microcontroller - Dio Driver
  *
- * Author: Abdelrahman Elsayed
+ *  Author: Abdelrahman Elsayed
  ******************************************************************************/
 
 #include "Dio.h"
@@ -43,10 +43,7 @@
 const Dio_ConfigType Dio_Configuration = {
 		.Channels[DioConf_LED1_CHANNEL_ID_INDEX ].Ch_Num =DioConf_LED1_CHANNEL_NUM,
 		.Channels[DioConf_LED1_CHANNEL_ID_INDEX ].Port_Num =DioConf_LED1_PORT_NUM,
-		.Channels[DioConf_LED2_CHANNEL_ID_INDEX ].Ch_Num =DioConf_LED2_CHANNEL_NUM,
-		.Channels[DioConf_LED2_CHANNEL_ID_INDEX ].Port_Num =DioConf_LED2_PORT_NUM,
 		.Channels[DioConf_SW1_CHANNEL_ID_INDEX ].Ch_Num =DioConf_SW1_CHANNEL_NUM,
 		.Channels[DioConf_SW1_CHANNEL_ID_INDEX ].Port_Num =DioConf_SW1_PORT_NUM,
-		.Channels[DioConf_SW2_CHANNEL_ID_INDEX ].Ch_Num =DioConf_SW2_CHANNEL_NUM,
-		.Channels[DioConf_SW2_CHANNEL_ID_INDEX ].Port_Num =DioConf_SW2_PORT_NUM
+		
 	};
